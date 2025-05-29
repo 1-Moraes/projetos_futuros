@@ -1,117 +1,570 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <title>Vendas</title>
+    <title>Jornal Nacional Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap');
+        
+        :root {
+            --preto: #121212;
+            --azul-marinho: #0a2463;
+            --azul-claro: #3e92cc;
+            --cinza-claro: #f5f5f5;
+            --laranja: #ff7f2a;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .titulo-jornal {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+        }
+        
+        .titulo-noticia {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .data-jornal {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--laranja);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .card-noticia {
+            transition: transform 0.3s ease;
+        }
+        
+        .card-noticia:hover {
+            transform: translateY(-5px);
+        }
+        
+        #conteudo-pagina {
+            min-height: 70vh;
+        }
+    </style>
 </head>
-<style>
-.conjunto_banner_capa{width: 100%; height: 190px;background: linear-gradient(188deg, rgba(0,0,0,1) 0%, rgba(67,67,79,1) 100%, rgba(0,212,255,1) 100%); display: flex; gap:100px; flex-wrap: wrap}
-img{width: 80px; height: 80px; border-radius: 365px; margin-left: 55px; margin-top: 20px;}
-a{color: #ffffff; font-family: "Anton", sans-serif;font-weight: 400;font-style: normal; text-decoration: none; margin: 20px;}
-.banner{margin-left:100px; margin-top: 60px; gap: 100px; font-size: 30px; padding: 20px;}
-h2{font-family: "Anton", sans-serif;font-weight: 400; font-style: normal;}
-.evento{width: 380px;height: 160px; border-radius: 45px;  border: 1.5px solid black; margin: 30px;} 
-#img{width: 160px; height: 80px; margin-top:-30px;} 
-.d{ display:flex; margin: 30px; gap: 10px; margin-top:-0px; margin-left: -0px;}
-.div{width: 380px; height: 1px;background: #000;}
-#brasileiraoA{width: 500px; height: 300px; border-radius: 0; margin-left: 0;}
-#data_brasileiraoA{width: 60px; height: 50px; background: gray; margin-top: 0; margin-top: 16px; color: beige; } 
-#img-libertadores{width: 1150px; height: 250px; border-radius: 0; position: relative; margin-left: 80px;}
-
-</style>
 <body>
-    <div class="conjunto_banner_capa">
-        <img src="EA Sports Logo PNG Vector (PDF) Free Download.jpg" alt="capa">
-
-        <div class="banner">
-            <a href="#">Início</a>
-            <a href="#">Jogos</a>
-            <a href="#">Brasileirão</a>
-            <a href="#">Libertadores</a>
-            <a href="#">Conta/login</a>
+    <!-- Cabeçalho do Jornal -->
+    <header class="bg-[#121212] text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h1 class="titulo-jornal text-4xl md:text-5xl text-[#3e92cc]">Jornal Nacional Digital</h1>
+                    <p class="data-jornal text-gray-300">Segunda-feira, 15 de Julho de 2024</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="bg-[#0a2463] hover:bg-[#071a47] text-white px-4 py-2 rounded">Assine</button>
+                    <button class="bg-[#3e92cc] hover:bg-[#2a7eb8] text-white px-4 py-2 rounded">Entrar</button>
+                </div>
+            </div>
         </div>
+    </header>
+    
+    <!-- Menu de Navegação -->
+    <nav class="bg-[#0a2463] text-white py-3 sticky top-0 z-10 shadow-md">
+        <div class="container mx-auto px-4">
+            <ul class="flex flex-wrap justify-center space-x-1 md:space-x-6">
+                <li><a href="#" class="nav-link px-2 py-1 hover:text-[#ff7f2a]" onclick="carregarPagina('home')">Home</a></li>
+                <li><a href="#" class="nav-link px-2 py-1 hover:text-[#ff7f2a]" onclick="carregarPagina('urna')">Urna Eletrônica</a></li>
+                <li><a href="#" class="nav-link px-2 py-1 hover:text-[#ff7f2a]" onclick="carregarPagina('politica')">Política</a></li>
+                <li><a href="#" class="nav-link px-2 py-1 hover:text-[#ff7f2a]" onclick="carregarPagina('economia')">Economia</a></li>
+                <li><a href="#" class="nav-link px-2 py-1 hover:text-[#ff7f2a]" onclick="carregarPagina('tecnologia')">Tecnologia</a></li>
+                <li><a href="#" class="nav-link px-2 py-1 hover:text-[#ff7f2a]" onclick="carregarPagina('esportes')">Esportes</a></li>
+                <li><a href="#" class="nav-link px-2 py-1 hover:text-[#ff7f2a]" onclick="carregarPagina('cultura')">Cultura</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Conteúdo Principal -->
+    <main class="container mx-auto px-4 py-6">
+        <div id="conteudo-pagina">
+            <strong><h1>Urna 2025: A Revolução de Quatro Amigos</h1></strong>
+            <p>No ano de 2025, em uma pequena cidade do interior, quatro amigos com habilidades complementares em tecnologia decidiram enfrentar um desafio ousado: criar sua própria urna eletrônica em Java, com o objetivo de participar de uma feira nacional de inovação e mostrar que a juventude brasileira também pode revolucionar a democracia digital.</p>
+            <br><hr>
+            <strong><h2>Os Amigos</h2></strong>
 
-</div>
-<!-- jogos para nao perder -->
- <h2>JOGOS E EVENTOS PARA NÃO PERDER</h2>
- <div class="EVENTOS" style="display: flex;">
+                <ol>•	João, o idealista e organizador do grupo, era apaixonado por justiça e política.</ol>
+                <ol>•	Enzo, o programador mais experiente, dominava Java como se fosse sua segunda língua.</ol>
+                <ol>•	Felipe, o designer da equipe, cuidava da interface e da experiência do usuário</ol>
+                <ol>•	Jhonny, o "engenheiro maluco", era bom com hardware e adorava montar coisas com Arduino, Raspberry Pi e peças recicladas.</ol>
+           <br><hr>
+           <strong><h1>A missão</h1></strong>
+           <p>Inspirados pelos problemas das eleições passadas — lentidão, desconfiança e pouca transparência — os quatro decidiram criar uma urna eletrônica simples, segura e de código aberto, utilizando Java como linguagem principal para o sistema da urna.</p>
+           <p>O projeto foi batizado de</p><strong><p>Urna 2025.</p></strong>
+           <br><hr>
+           <strong><h1>Dividindo as funções</h1></strong>
+           <li>Enzo começou a desenvolver o sistema central em Java, criando classes como Candidato, Eleitor, Voto e Urna. Ele também criou um sistema de login com CPF e senha criptografada.</li>
+           <li>João redigiu o regulamento de votação, criou simulações de eleições e organizou reuniões para testar a segurança dos votos.</li>
+           <li>Felipe desenhou a interface em Java Swing, criando uma tela amigável com botões grandes, fotos dos candidatos e um som de confirmação de voto</li>
+           <li>Jhonny pegou um Raspberry Pi, conectou a uma tela touch e adaptou um pequeno leitor de digitais para validar o eleitor antes da votação.</li>
+           <br><hr>
+           <strong><h1>O RESULTADO</h1></strong>
+           <p>Depois de dois meses de trabalho intenso, testes, pizzas e bugs misteriosos, a Urna 2025 foi apresentada na feira. Ela permitia votação com autenticação por digital, mostrava resultados em tempo real, e todo o código estava publicado no GitHub.
+            O projeto fez tanto sucesso que foi convidado para testes em uma eleição estudantil em uma universidade. A votação foi um sucesso: rápida, segura e transparente.
+            </p><br><hr>
+            <strong><h1>O Legado!</h1></strong>
+            <p>João, Enzo, Felipe e Jhonny provaram que a união entre tecnologia, criatividade e propósito pode transformar a sociedade. A Urna 2025 virou um projeto de código aberto usado em escolas e universidades por todo o Brasil.
+            E tudo começou com quatro amigos, um Raspberry Pi, muito café, e linhas e mais linhas de Java.
+            </p>
+        </div>
+    </main>
+    
+    <!-- Rodapé -->
+    <footer class="bg-[#121212] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-[#3e92cc]">Jornal Nacional Digital</h3>
+                    <p class="text-gray-300">Trazendo as notícias mais relevantes para você desde 1995.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-[#3e92cc]">Links Rápidos</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-[#ff7f2a]">Sobre nós</a></li>
+                        <li><a href="#" class="hover:text-[#ff7f2a]">Contato</a></li>
+                        <li><a href="#" class="hover:text-[#ff7f2a]">Política de Privacidade</a></li>
+                        <li><a href="#" class="hover:text-[#ff7f2a]">Termos de Uso</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-[#3e92cc]">Redes Sociais</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-[#ff7f2a]">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#ff7f2a]">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#ff7f2a]">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#ff7f2a]">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2024 Jornal Nacional Digital. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
- <div class="evento">
-        <div class="d">
-            <p style="font-family: sans-serif;font-weight: 400;font-style: normal; font-size: 13px; margin-left: 30px;">Chanpions League       Hoje • 16:00</p>
-            <p style="  font-family:sans-serif;font-weight: 400;font-style: normal; border: 1px solid green; color:  green; width: 120px; height: 30px; font-size: 12px; font-weight: bold;display: flex; justify-content: center; align-items: center;border-radius: 5px;">FIQUE POR DENTRO</p></strong>
-        </div>  
-           
-  
-        <img id="img" src="Captura de tela 2025-04-08 105355.png">
-        <div class="div"></div>
-</div>
-<!-- -------------------------------------------------------- -->
-<div class="evento">
-    <div class="d">
-        <p style="font-family: sans-serif;font-weight: 400;font-style: normal; font-size: 13px; margin-left: 30px;">Chanpions League       Hoje • 16:00</p>
-        <p style="  font-family:sans-serif;font-weight: 400;font-style: normal; border: 1px solid green; color:  green; width: 120px; height: 30px; font-size: 12px; font-weight: bold;display: flex; justify-content: center; align-items: center;border-radius: 5px;">FIQUE POR DENTRO</p></strong>
-    </div>  
-       
-
-    <img id="img" src="Captura de tela 2025-04-08 115028.png">
-    <div class="div"></div>
-</div>
-<!-- -------------------------------------------------------- -->
-<div class="evento">
-    <div class="d">
-        <p style="font-family: sans-serif;font-weight: 400;font-style: normal; font-size: 13px; margin-left: 30px;">Chanpions League       Hoje • 16:00</p>
-        <p style="  font-family:sans-serif;font-weight: 400;font-style: normal; border: 1px solid green; color:  green; width: 120px; height: 30px; font-size: 12px; font-weight: bold;display: flex; justify-content: center; align-items: center;border-radius: 5px;">FIQUE POR DENTRO</p></strong>
-    </div>  
-       
-
-    <img id="img" src="Captura de tela 2025-04-08 115332.png">
-    <div class="div"></div>
-</div>
-    <!-- -------------------------------------------------------- -->
-</div>
-<hr>
-<div class="pai-dos-brasileiroes" style="display: flex; justify-content: space-around; background-image: url(Premium\ Vector\ _\ Football\ or\ soccer\ background\ with\ big\ ball\ in\ black\ colors.jpg);">
-
-<div class="serieA" style="width: 500px; height: 500px; ">
-<h2 style="color: rgb(255, 249, 246); text-shadow: 1px 1px 2px pink;">Brasileirão Série A</h2>
-<div class="temporada" style="align-items: center; justify-content: center; display: block;">
-    <div class="divs" style="display: flex;">
-    <p style="width: 400px; height: 50px; background: gray; display: flex; justify-content: center; align-items: center; color: #ffffff;">Temporada</p>
-    <select name="data" id="data_brasileiraoA">
-        <option value="data">2025</option>
-        <option value="data">2024</option>
-        <option value="data">2023</option>
-        <option value="data">2022</option>
-    </select>
-</div>
-   <img id="brasileiraoA" src="Captura de tela 2025-04-08 123736.png" alt="">
-</div>
-</div>
-<!-- --------------------------------divisão -->
-<div class="serieB" style="width: 500px; height: 500px; ">
-<h2 style="color: rgb(255, 249, 246); text-shadow: 1px 1px 2px pink;">Brasileirão Série B</h2>
-<div class="temporada" style="align-items: center; justify-content: center; display: block;">
-    <div class="divs" style="display: flex;">
-    <p style="width: 400px; height: 50px; background: gray; display: flex; justify-content: center; align-items: center; color: #ffffff;">Temporada</p>
-    <select name="data" id="data_brasileiraoA">
-        <option value="data">2025</option>
-        <option value="data">2024</option>
-        <option value="data">2023</option>
-        <option value="data">2022</option>
-    </select>
-</div>
-   <img id="brasileiraoA" src="Captura de tela 2025-04-08 144218.png" alt="">
-</div>
-</div>
-</div>
 
 
- <h2>Libertadores</h2>
- <img id="img-libertadores" src="libertadores.jpg" alt="">
-</body>
-</html>
+<script>
+    // Gera o bloco de notícia principal
+    function gerarNoticiaPrincipal() {
+        return `
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect fill='%230a2463' width='800' height='400'/%3E%3Ctext fill='%23ffffff' font-family='Arial' font-size='32' x='400' y='200' text-anchor='middle' alignment-baseline='middle'%3EUrna Eletrônica Brasileira%3C/text%3E%3C/svg%3E" alt="Urna Eletrônica" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <span class="inline-block bg-[#3e92cc] text-white text-sm px-3 py-1 rounded-full mb-2">Tecnologia</span>
+                    <h2 class="titulo-noticia text-2xl md:text-3xl mb-4">
+                        Os Quatro Amigos que Revolucionaram as Eleições: A História da Urna Eletrônica Brasileira
+                    </h2>
+                    <p class="text-gray-600 mb-4">
+                        Conheça a incrível jornada de quatro amigos que, unidos por um sonho, criaram uma das tecnologias eleitorais mais seguras do mundo...
+                    </p>
+                    <a href="#" class="inline-block bg-[#ff7f2a] hover:bg-[#e06a1c] text-white font-bold py-2 px-4 rounded" onclick="carregarPagina('urna')">Leia mais</a>
+                </div>
+            </div>
+        `;
+    }
+
+    // Gera um card de notícia secundária
+    function gerarCardNoticia({ imagemCor, categoria, titulo, resumo, pagina }) {
+        return `
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden card-noticia">
+                <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect fill='${imagemCor}' width='400' height='200'/%3E%3Ctext fill='%23ffffff' font-family='Arial' font-size='24' x='200' y='100' text-anchor='middle' alignment-baseline='middle'%3E${categoria}%3C/text%3E%3C/svg%3E" alt="${categoria}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <span class="inline-block bg-[#0a2463] text-white text-xs px-2 py-1 rounded-full mb-2">${categoria}</span>
+                    <h3 class="titulo-noticia text-xl mb-2">${titulo}</h3>
+                    <p class="text-gray-600 text-sm mb-3">${resumo}</p>
+                    <a href="#" class="text-[#ff7f2a] hover:underline font-bold text-sm" onclick="carregarPagina('${pagina}')">Leia mais</a>
+                </div>
+            </div>
+        `;
+    }
+
+    const paginas = {
+        home: `
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2">
+                    ${gerarNoticiaPrincipal()}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        ${gerarCardNoticia({
+                            imagemCor: '%233e92cc',
+                            categoria: 'Economia',
+                            titulo: 'Mercado financeiro reage positivamente após anúncio de novas medidas econômicas',
+                            resumo: 'Bolsa sobe 2,5% e dólar cai após pacote de medidas anunciado pelo governo...',
+                            pagina: 'economia'
+                        })}
+                        ${gerarCardNoticia({
+                            imagemCor: '%23ff7f2a',
+                            categoria: 'Política',
+                            titulo: 'Congresso aprova projeto de lei que moderniza sistema eleitoral',
+                            resumo: 'Novas regras visam aumentar a transparência e segurança nas eleições...',
+                            pagina: 'politica'
+                        })}
+                    </div>
+                </div>
+                <div class="lg:col-span-1">
+                    <div class="bg-[#f0f5ff] rounded-lg p-4 mb-6">
+                        <h3 class="text-[#0a2463] font-bold text-xl mb-4 border-b border-[#3e92cc] pb-2">Últimas Notícias</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <!-- Aqui seguem os itens de notícias que você ainda vai completar -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `
+    };
+</script>
+<!-- 
+segunda parte -->
+<script>
+
+// Função para gerar um item da lista de "Últimas Notícias"
+function gerarItemUltimaNoticia({ titulo, tempo, pagina }) {
+    return `
+        <li>
+            <a href="#" class="flex items-start hover:bg-[#e6eeff] p-2 rounded" onclick="carregarPagina('${pagina}')">
+                <span class="text-[#0a2463] font-bold mr-2">▶</span>
+                <div>
+                    <h4 class="font-semibold">${titulo}</h4>
+                    <p class="text-sm text-gray-600">${tempo}</p>
+                </div>
+            </a>
+        </li>
+    `;
+}
+// Lista de notícias para exibição lateral
+const ultimasNoticias = [
+    {
+        titulo: "Nova tecnologia de reconhecimento facial é implementada em aeroportos",
+        tempo: "Há 2 horas",
+        pagina: "tecnologia"
+    },
+    {
+        titulo: "Brasil conquista medalha de ouro no vôlei masculino",
+        tempo: "Há 4 horas",
+        pagina: "esportes"
+    },
+    {
+        titulo: "Festival de cinema anuncia vencedores da edição 2024",
+        tempo: "Há 6 horas",
+        pagina: "cultura"
+    },
+    {
+        titulo: "Inflação recua pelo terceiro mês consecutivo",
+        tempo: "Há 8 horas",
+        pagina: "economia"
+    },
+    {
+        titulo: "Presidente anuncia pacote de investimentos em infraestrutura",
+        tempo: "Há 10 horas",
+        pagina: "politica"
+    }
+];
+
+// Gerar HTML completo da seção "Últimas Notícias"
+function gerarListaUltimasNoticias() {
+    return `
+        <div class="bg-[#f0f5ff] rounded-lg p-4 mb-6">
+            <h3 class="text-[#0a2463] font-bold text-xl mb-4 border-b border-[#3e92cc] pb-2">Últimas Notícias</h3>
+            <ul class="space-y-4">
+                ${ultimasNoticias.map(gerarItemUltimaNoticia).join('')}
+            </ul>
+        </div>
+    `;
+}
+
+
+<!-- terceira parte -->
+ const previsoes = [
+    {
+        cidade: "São Paulo",
+        temperatura: "28°C",
+        icone: "sol"
+    },
+    {
+        cidade: "Rio de Janeiro",
+        temperatura: "32°C",
+        icone: "sol"
+    },
+    {
+        cidade: "Brasília",
+        temperatura: "24°C",
+        icone: "chuva"
+    },
+    {
+        cidade: "Recife",
+        temperatura: "29°C",
+        icone: "chuva"
+    }
+];
+// <!-- ------------------- -->
+ function gerarIconeClima(tipo) {
+    if (tipo === "sol") {
+        return `
+            <svg class="w-6 h-6 text-yellow-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+            </svg>`;
+    } else if (tipo === "chuva") {
+        return `
+            <svg class="w-6 h-6 text-blue-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"></path>
+            </svg>`;
+    }
+    return "";
+}
+// <!-- ---------função para gerar o card da previsão -->
+ function gerarPrevisao({ cidade, temperatura, icone }) {
+    return `
+        <div class="flex justify-between items-center p-2 hover:bg-gray-100 rounded">
+            <span>${cidade}</span>
+            <div class="flex items-center">
+                ${gerarIconeClima(icone)}
+                <span>${temperatura}</span>
+            </div>
+        </div>
+    `;
+}
+// <!-- ----------------função completa da função -->
+ function gerarSecaoPrevisaoDoTempo() {
+    return `
+        <div class="bg-white rounded-lg shadow-lg p-4">
+            <h3 class="text-[#ff7f2a] font-bold text-xl mb-4 border-b border-gray-200 pb-2">Previsão do Tempo</h3>
+            <div class="space-y-3">
+                ${previsoes.map(gerarPrevisao).join("")}
+            </div>
+        </div>
+    `;
+}
+// <!-- integração com paginas home -->
+
+
+// <!-- urna-eletronica -->
+ const artigoUrna = {
+    titulo: "Os Quatro Amigos que Revolucionaram as Eleições: A História da Urna Eletrônica Brasileira",
+    data: "15 de Julho de 2024",
+    autor: "Maria Silva",
+    categorias: ["Tecnologia", "História"],
+    imagem: "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Crect fill='%230a2463' width='1200' height='400'/%3E%3Ctext fill='%23ffffff' font-family='Arial' font-size='48' x='600' y='200' text-anchor='middle' alignment-baseline='middle'%3EUrna Eletrônica Brasileira%3C/text%3E%3C/svg%3E",
+    paragrafos: [
+        "Em meados dos anos 90, quatro amigos de longa data, unidos pela paixão pela tecnologia...",
+        // (...) continue listando parágrafos principais aqui para modularizar
+    ],
+    secoes: [
+        {
+            titulo: "O Início de uma Ideia Revolucionária",
+            conteudo: [
+                "Tudo começou em 1994, quando os quatro amigos se reuniram...",
+                "Estávamos assistindo ao noticiário sobre as eleições...",
+            ]
+        },
+        {
+            titulo: "Superando Desafios",
+            conteudo: [
+                "O caminho não foi fácil. Os quatro amigos enfrentaram inúmeros desafios...",
+                "Muitas pessoas achavam que era impossível criar um sistema eletrônico seguro...",
+                "Júlia Santos foi fundamental para resolver esse último problema...",
+            ]
+        },
+        // outras seções seguem no mesmo formato
+    ],
+    listasEspeciais: [
+        {
+            titulo: "Os Quatro Pioneiros",
+            cor: "#3e92cc",
+            itens: [
+                "Carlos Rocha: Especialista em segurança de sistemas...",
+                "Ana Mendes: Engenheira de software...",
+                "Roberto Oliveira: Especialista em hardware...",
+                "Júlia Santos: Especialista em interface de usuário..."
+            ]
+        },
+        {
+            titulo: "Principais Inovações",
+            cor: "#ff7f2a",
+            itens: [
+                "Sistema operacional próprio...",
+                "Criptografia avançada...",
+                "Interface simplificada e acessível...",
+                "Verificação em múltiplas camadas...",
+                "Bateria de emergência..."
+            ]
+        },
+        {
+            titulo: "Resultados Alcançados",
+            cor: "#ff7f2a",
+            itens: [
+                "Redução do tempo de apuração...",
+                "Diminuição significativa de votos nulos...",
+                "Eliminação de fraudes...",
+                "Acessibilidade garantida...",
+                "Modelo de referência internacional..."
+            ]
+        },
+        {
+            titulo: "Curiosidades sobre a Urna Eletrônica",
+            cor: "#0a2463",
+            itens: [
+                "A primeira versão da urna tinha apenas 2MB de memória RAM",
+                "O protótipo inicial foi montado na garagem...",
+                "O código-fonte é auditado por especialistas...",
+                "Mais de 20 países já enviaram representantes...",
+                "As urnas passam por testes públicos de segurança..."
+            ]
+        }
+    ],
+    conclusao: [
+        "A história da urna eletrônica brasileira é um exemplo inspirador...",
+        "Como disse Ana Mendes em seu discurso ao receber o Prêmio..."
+    ],
+    referencias: [
+        "História Oficial da Urna Eletrônica - TSE",
+        "Entrevista com os Criadores da Urna - Revista Tecnologia & Democracia",
+        "Documentário: A Revolução Silenciosa das Eleições Brasileiras",
+        "Livro: \"Quatro Amigos e Uma Urna\" - Biografia autorizada dos criadores"
+    ]
+};
+
+// <!-- botoes de interacao -->
+ function gerarBotoesInteracao() {
+    return `
+    <div class="mt-8 pt-6 border-t border-gray-200">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                ${gerarBotao("Curtir", "M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z")}
+                ${gerarBotao("Comentar", "M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z")}
+            </div>
+            <div class="flex items-center space-x-4">
+                ${gerarBotao("Compartilhar", "M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z")}
+            </div>
+        </div>
+    </div>
+    `;
+}
+
+function gerarBotao(texto, svgPath) {
+    return `
+    <button class="flex items-center space-x-1 text-[#3e92cc] hover:text-[#2a7eb8]">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="${svgPath}"></path>
+        </svg>
+        <span>${texto}</span>
+    </button>`;
+}
+
+// <!-- Estrutura de dados: -->
+ const noticiasRelacionadas = [
+    {
+        categoria: "Tecnologia",
+        cor: "#3e92cc",
+        titulo: "TSE anuncia melhorias de segurança para as próximas eleições",
+        descricao: "Novas urnas contarão com recursos biométricos avançados...",
+        destino: "tecnologia"
+    },
+    {
+        categoria: "Política",
+        cor: "#ff7f2a",
+        titulo: "Brasil exporta tecnologia de urnas eletrônicas para países vizinhos",
+        descricao: "Paraguai e Equador adotam sistema inspirado no modelo brasileiro...",
+        destino: "politica"
+    },
+    {
+        categoria: "História",
+        cor: "#0a2463",
+        titulo: "30 anos de democracia: como as eleições mudaram o Brasil",
+        descricao: "Um olhar sobre as transformações políticas desde a redemocratização...",
+        destino: "politica"
+    }
+];
+// <!-- Função -->
+ function gerarNoticiasRelacionadas(noticias) {
+    return `
+    <div class="max-w-4xl mx-auto mt-8">
+        <h2 class="text-2xl font-bold mb-6 text-[#0a2463]">Notícias Relacionadas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            ${noticias.map(noticia => gerarCardNoticia(noticia)).join("")}
+        </div>
+    </div>`;
+}
+
+function gerarCardNoticia({ categoria, cor, titulo, descricao, destino }) {
+    const img = `data:image/svg+xml;charset=UTF-8,` +
+        encodeURIComponent(`
+            <svg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'>
+                <rect fill='${cor}' width='400' height='200'/>
+                <text fill='#ffffff' font-family='Arial' font-size='24' x='200' y='100' text-anchor='middle' alignment-baseline='middle'>
+                    ${categoria}
+                </text>
+            </svg>
+        `);
+
+    return `
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-noticia">
+        <img src="${img}" alt="${categoria}" class="w-full h-40 object-cover">
+        <div class="p-4">
+            <span class="inline-block bg-[${cor}] text-white text-xs px-2 py-1 rounded-full mb-2">${categoria}</span>
+            <h3 class="titulo-noticia text-lg mb-2">${titulo}</h3>
+            <p class="text-gray-600 text-sm mb-3">${descricao}</p>
+            <a href="#" class="text-[#ff7f2a] hover:underline font-bold text-sm" onclick="carregarPagina('${destino}')">Leia mais</a>
+        </div>
+    </div>`;
+}
+
+
+// <!-- usar no final da página -->
+
+
+
+// -------------
+ <div class="lg:col-span-1">
+    ${gerarListaUltimasNoticias()}
+    ${gerarSecaoPrevisaoDoTempo()}
+</div>
+
+// ---------------
+${gerarBotoesInteracao()}
+${gerarNoticiasRelacionadas(noticiasRelacionadas)}
+</script>
